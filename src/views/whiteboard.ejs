@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whiteboard</title>
+    <link rel="stylesheet" href="/public/css/index.css" />
+</head>
+<body>
+    <div style="margin-top: 10px;">A space just for us to draw memories, doodles and smiles.</div>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <div id="pallet" class="pallet"></div>
+
+    <script>
+        window.colors = <%- JSON.stringify(colors) %>
+        window.uuid = <%- JSON.stringify(uuid) %>
+    </script>
+    <script src="/public/scripts/wss.controller.js"></script>
+    <script src="/public/scripts/pallet.controller.js"></script>
+    <script src="/public/scripts/draw.controller.js"></script>
+</body>
+</html>

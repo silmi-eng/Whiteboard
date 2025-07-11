@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Mono", monospace;
+    flex-direction: column;
+    color: #4b4b4b;
+    text-align: center;
+    overflow: hidden;
+}
+
+.home {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+
+.create_whiteboard {
+    padding: 10px 20px;
+    background: #ffeef3;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #a1a1a1;
+}
+
+canvas {
+    width: 100%;
+    height: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+
+.pallet {
+    padding: 5px;
+    border: 2px solid #cdcdcd;
+    max-width: 400px;
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    border-radius: 10px;
+    display: flex;
+    transform: translate(-50%, -10%);
+    transition: all .6s;
+}
+
+.pallet > * {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #cdcdcd;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all .4s;
+}
