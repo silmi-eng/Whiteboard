@@ -44,7 +44,7 @@ node src/server.js
 Open your browser and go to:
 
 ```
-http://localhost:3000
+http://localhost:3200
 ```
 
 ---
