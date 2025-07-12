@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 
 module.exports = (app, express, whiteboard) => {
@@ -13,7 +14,7 @@ module.exports = (app, express, whiteboard) => {
         
 
         const { pallet, draw, uuid } = RESPNSE;
-        res.status(200).render('whiteboard', { colors: pallet, draw, uuid });
+        res.status(200).render('whiteboard', { colors: pallet, draw, uuid, wss_url: process.env.WSS });
     });
 
     app.get('/', async (req, res, next) => {

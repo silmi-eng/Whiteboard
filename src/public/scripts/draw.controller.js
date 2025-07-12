@@ -2,10 +2,16 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let context = { drawing: false, color: null, lastX: null, lastY: null };
-const connection = new WebConnection({ url: 'ws://192.168.1.217:3000/', connection_id: window.uuid });
+const connection = new WebConnection({ url: window.wss_url, connection_id: window.uuid });
 
 const draw = {
     drawing: ({ x_, y_, color }) => {
+        if (x_ === null || y_ === null) {
+            context.lastX = null;
+            context.lastY = null;
+            return;
+        }
+
         const rec = canvas.getBoundingClientRect();
 
         const x = x_ * rec.width;
@@ -57,6 +63,7 @@ const draw = {
 
 canvas.addEventListener('mousedown', () => context.drawing = true);
 canvas.addEventListener('mouseup', () => {
+    connection.draw({ x_: null, y_: null, color: null });
     context.drawing = false;
     context.lastX = null;
     context.lastY = null;
@@ -65,6 +72,7 @@ canvas.addEventListener('mousemove', draw.mouse_event);
 
 canvas.addEventListener('touchstart', () => context.drawing = true);
 canvas.addEventListener('touchend', () => {
+    connection.draw({ x_: null, y_: null, color: null });
     context.drawing = false;
     context.lastX = null;
     context.lastY = null;
