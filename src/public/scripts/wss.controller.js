@@ -14,7 +14,7 @@ class WebConnection {
                     console.log('Enter on room successfuly');
                 break;
                 case 'mouse_event':
-                    this.runDraw(data);
+                    this.runCb('drawing', data)
                 break;
             }
         });
