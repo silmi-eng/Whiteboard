@@ -23,8 +23,8 @@ class WebConnection {
         });
     }
 
-    history_event = ({ x_, y_, color, uuid }) => {
-        this.whiteboard.history(uuid, { x_, y_, color });
+    history_event = ({ x_, y_, color, uuid, erase }) => {
+        this.whiteboard.history(uuid, { x_, y_, color, erase });
     }
 
     mouse_event = ({ x_, y_, color, uuid }, ws) => {

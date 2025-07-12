@@ -37,7 +37,7 @@ class WebConnection {
         );
     };
 
-    draw = ({ x_, y_, color }) => {
+    draw = ({ x_, y_, color, erase }) => {
         this.wss.send(
             JSON.stringify({ 
                 action: 'mouse_event', 
@@ -45,7 +45,8 @@ class WebConnection {
                     uuid: this.connection_id,
                     x_,
                     y_,
-                    color
+                    color,
+                    erase
                 }
             })
         );

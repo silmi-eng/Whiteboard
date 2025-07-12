@@ -1,11 +1,12 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-let context = { drawing: false, color: null, lastX: null, lastY: null };
+let context = { drawing: false, color: null, lastX: null, lastY: null, erase: false };
 const connection = new WebConnection({ url: window.wss_url, connection_id: window.uuid });
 
 const draw = {
-    drawing: ({ x_, y_, color }) => {
+    drawing: ({ x_, y_, color, erase }) => {
+        console.log(context);
         if (x_ === null || y_ === null) {
             context.lastX = null;
             context.lastY = null;
@@ -17,9 +18,17 @@ const draw = {
         const x = x_ * rec.width;
         const y = y_ * rec.height;
 
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2;
-        ctx.lineCap = "round";
+        if (erase) {
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.strokeStyle = "rgba(0,0,0,1)";
+            ctx.lineWidth = 10;
+        }
+        else {
+            ctx.globalCompositeOperation = "source-over";
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.lineCap = "round";
+        }    
 
         if (context.lastX != null && context.lastY != null) {
             ctx.beginPath();
@@ -38,24 +47,27 @@ const draw = {
         context.lastY = y;
     },
     mouse_event: (e) => {
-        if (!context.drawing || context.color === null) return;
+        if (!context.drawing || (context.color === null && context.erase === false)) return;
 
         const rec = canvas.getBoundingClientRect();
         const x = (e.clientX - rec.left) / rec.width;
         const y = (e.clientY - rec.top) / rec.height;
 
-        draw.drawing({ x_: x, y_: y, color: context.color });
-        connection.draw({ x_: x, y_: y, color: context.color });
+        console.log({ x_: x, y_: y, color: context.color, erase: context.erase });
+        
+
+        draw.drawing({ x_: x, y_: y, color: context.color, erase: context.erase });
+        connection.draw({ x_: x, y_: y, color: context.color, erase: context.erase });
     },
     touch_event: (e) => {
-        if (!context.drawing || context.color === null) return;
+        if (!context.drawing || (context.color === null && context.erase === false)) return;
 
         const rec = canvas.getBoundingClientRect();
         const x = (e.touches[0].clientX - rec.left) / rec.width;
         const y = (e.touches[0].clientY - rec.top) / rec.height;
 
-        draw.drawing({ x_: x, y_: y, color: context.color });
-        connection.draw({ x_: x, y_: y, color: context.color });
+        draw.drawing({ x_: x, y_: y, color: context.color, erase: context.erase });
+        connection.draw({ x_: x, y_: y, color: context.color, erase: context.erase });
 
         e.preventDefault();
     }

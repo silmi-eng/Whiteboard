@@ -14,10 +14,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%);
+    width: 100%;
 }
 
 .create_whiteboard {
-    padding: 10px 20px;
+    padding: 10px 10px;
     background: #ffeef3;
     border-radius: 20px;
     text-decoration: none;
@@ -54,4 +55,16 @@ canvas {
     margin: 5px;
     cursor: pointer;
     transition: all .4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pallet > .content_image {
+    width: 30px;
+    height: 30px;
+    background-image: url('/public/icons/icons8-erase.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
 }
