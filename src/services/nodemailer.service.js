@@ -22,7 +22,7 @@ class NodeMailer {
                     it's you I like to be with." ✨ 
                 </blockquote>
 
-                <p style="margin-top: 30px;">Podes ver a mensagem clicando no botão abaixo:</p>
+                <p style="margin-top: 30px;">You can see the message by clicking the button below:</p>
 
                 <a href="${link}" style="
                     display: inline-block;
@@ -33,7 +33,7 @@ class NodeMailer {
                     border-radius: 6px;
                     font-weight: bold;
                 ">
-                    Ver mensagem no White Board 💜
+                    View message on White Board 💜
                 </a>
             </div>
         `;
