@@ -17,6 +17,38 @@ body {
     width: 100%;
 }
 
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    padding: 10px 10px;
+    background: #ffeef3;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #a1a1a1;
+    border: 1px solid #a1a1a1;
+    outline-color: #a1a1a1;
+    transition: all 1s;
+    font-family: "Roboto Mono", monospace;
+    margin-right: 10px;
+}
+
+.next {
+    padding: 9px 15px;
+    background: #ffeef3;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #a1a1a1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s;
+    border: 1px solid #a1a1a1;
+}
+
 .create_whiteboard {
     padding: 10px 10px;
     background: #ffeef3;
@@ -60,11 +92,7 @@ canvas {
     justify-content: center;
 }
 
-.pallet > .content_image {
-    width: 30px;
-    height: 30px;
-    background-image: url('/public/icons/icons8-erase.png');
-    background-size: auto;
-    background-position: center;
-    background-repeat: no-repeat;
+.pallet > * > img {
+    width: 17px;
+    height: 17px;
 }

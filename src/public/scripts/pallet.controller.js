@@ -3,6 +3,18 @@ const pallet = {
     const panel = document.getElementById("pallet");
     const fragment = document.createDocumentFragment();
 
+    const erase = document.createElement('div');
+    const img = document.createElement('img');
+    img.src = '/public/icons/eraser.png';
+
+    erase.appendChild(img);
+
+    erase.addEventListener('click', (e) => {
+      pallet.set.clear(e.target);
+    });
+
+    fragment.appendChild(erase);
+
     for (const c in colors) {
       const color = document.createElement("div");
       color.style.background = colors[c];
@@ -12,15 +24,6 @@ const pallet = {
 
       fragment.appendChild(color);
     }
-
-    const erase = document.createElement('div');
-    erase.classList.add('content_image');
-
-    erase.addEventListener('click', (e) => {
-      pallet.set.clear(e.target);
-    });
-
-    fragment.appendChild(erase);
 
     panel.appendChild(fragment);
     setTimeout(() => panel.style.bottom = "20px", 500);

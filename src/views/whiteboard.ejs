@@ -13,11 +13,16 @@
 <body>
     <div style="margin-top: 10px;">A space just for us to draw memories, doodles and smiles.</div>
     <canvas id="canvas" width="800" height="600"></canvas>
-    <div id="pallet" class="pallet"></div>
+    <div id="pallet" class="pallet">
+        <div class="content_send" id="notification">
+            <img src="/public/icons/send.png" alt="">
+        </div>
+    </div>
 
     <script>
         window.colors = <%- JSON.stringify(colors) %>
         window.uuid = <%- JSON.stringify(uuid) %>
+        window.email = <%- JSON.stringify(email) %>
         window.wss_url = <%- JSON.stringify(wss_url) %>
     </script>
     <script src="/public/scripts/wss.controller.js"></script>

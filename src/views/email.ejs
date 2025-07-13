@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whiteboard</title>
+    <link rel="stylesheet" href="/public/css/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/public/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/public/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+</head>
+<body>
+    <div class="home">
+        <h1>Whiteboard</h1>
+        <p>Enter your email to receive notifications.</p>
+        <br>
+        <div class="form">
+            <input type="email" name="" id="email" placeholder="Email" autocomplete="email"/>
+            <div class="next" onclick="setEmail('<%-url%>')">→</div>
+        </div>
+    </div>
+    
+    <script>
+        const setEmail = (url) => {
+            const data = document.getElementById('email').value;
+            
+            if (data)
+                window.location.href = `${url}/${encodeURIComponent(data)}`;
+        }
+    </script>
+</body>
+</html>

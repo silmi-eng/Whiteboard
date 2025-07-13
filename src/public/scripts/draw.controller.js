@@ -2,7 +2,9 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let context = { drawing: false, color: null, lastX: null, lastY: null, erase: false };
-const connection = new WebConnection({ url: window.wss_url, connection_id: window.uuid });
+const connection = new WebConnection({ url: window.wss_url, connection_id: window.uuid, email: window.email });
+
+document.getElementById('notification').addEventListener('click', () => { connection.notification(); });
 
 const draw = {
     drawing: ({ x_, y_, color, erase }) => {

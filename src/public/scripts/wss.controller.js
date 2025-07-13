@@ -1,7 +1,8 @@
 class WebConnection {
-    constructor ({ url, connection_id }) {
+    constructor ({ url, connection_id, email }) {
         this.wss = new WebSocket(url);
         this.connection_id = connection_id;
+        this.email = email;
         this.callback = {};
 
         this.wss.addEventListener('open', this.room);
@@ -15,6 +16,9 @@ class WebConnection {
                 break;
                 case 'mouse_event':
                     this.runCb('drawing', data)
+                break;
+                case 'notification_event':
+                    console.log(data);
                 break;
             }
         });
@@ -33,7 +37,7 @@ class WebConnection {
 
     room = () => {
         this.wss.send(
-            JSON.stringify({ action: 'room', data: { uuid: this.connection_id }})
+            JSON.stringify({ action: 'room', data: { uuid: this.connection_id, email: this.email }})
         );
     };
 
@@ -51,6 +55,12 @@ class WebConnection {
             })
         );
     };
+
+    notification = () => {
+        this.wss.send(
+            JSON.stringify({ action: 'notification_event', data: { uuid: this.connection_id, email: this.email }})
+        );
+    }
 
     setCb = (param, func) => this.callback[param] = func;
 

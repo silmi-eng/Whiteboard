@@ -1,7 +1,12 @@
+require('dotenv').config();
 const { pallet } = require('./colors.service');
+const { NodeMailer } = require('./nodemailer.service');
 
 class Whiteboard {
-    constructor () { this.database = new Map() }
+    constructor () { 
+        this.database = new Map();
+        this.nodemailer = new NodeMailer({ user: process.env.EMAIL, pass: process.env.PASS });
+    }
 
     uuid = async () => { return ([...Array(4)]).map(() => Math.random().toString(36).substring(2, 6)).join('-') }
 
@@ -13,7 +18,8 @@ class Whiteboard {
             uuid: uid,
             pallet: palletColors,
             draw: [],
-            clients: new Set()
+            clients: new Set(),
+            emails: []
         };
 
         this.database.set(whiteboard.uuid, whiteboard);
@@ -23,12 +29,17 @@ class Whiteboard {
 
     decode = async (uuid) => { return this.database.get(uuid) };
 
-    clients = async ({ uuid, ws }) => {
+    clients = async ({ uuid, ws, email }) => {
         const connected = this.database.get(uuid);
         if (!connected) return;
 
+        connected.emails.push(email);
         connected.clients.add(ws);
         ws.send(JSON.stringify({ action: 'welcome', data: { history: connected.draw } }));
+    }
+
+    connections_email = (uuid) => {
+        return this.database.get(uuid).emails;
     }
     
     connections = (uuid) => {
